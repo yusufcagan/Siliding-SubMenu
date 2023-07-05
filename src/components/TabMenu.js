@@ -1,7 +1,10 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image, Dimensions } from 'react-native'
 import React, { useEffect, useRef } from 'react'
-import * as Animatable from 'react-native-animatable';
+import * as Animatable from 'react-native-animatable'
+import SilidingMenu from '../components/SilidingMenu'
+import { SilidingData } from '../data/DATA'
 
+const { width, height } = Dimensions.get('window');
 
 const TabMenu = ({ index, item, selected, setSelected }) => {
 
@@ -11,36 +14,65 @@ const TabMenu = ({ index, item, selected, setSelected }) => {
         if (selected === index) {
             viewRef.current.animate({ 0: { scale: 0 }, 1: { scale: 1 } });
         } else {
-            viewRef.current.animate({ 0: { scale: 1, }, 1: { scale: 0, } });
+            //.current.animate({ 0: { scale: 1, }, 1: { scale: 0, } });
         }
     }, [selected, viewRef]);
 
     return (
-        <View style={{ flex: selected === index ? 1 : null }} >
-            <Animatable.View
-                ref={viewRef}
-                style={[StyleSheet.absoluteFillObject, { backgroundColor: '#637aff', borderRadius: 16 }]} />
+        <View style={[{ flex: selected === index ? 1 : null }, styles.container]} >
             {selected === index ?
-                <View></View>
+                <Animatable.View
+                    ref={viewRef}
+                    style={[StyleSheet.absoluteFillObject, { backgroundColor: item.color }]} >
+                    <View style={{ flexDirection: 'row', height: width / 8 }}>
+                        <View style={{ flexDirection: 'row', flex: 1.2, alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={styles.roteText}>{item.label.toUpperCase()}</Text>
+                        </View>
+                        <View style={{ flex: 15, flexDirection: 'row', backgroundColor: 'white', margin: 3, borderRadius: 5, justifyContent: 'space-between' }}>
+                            {SilidingData.map((data, index) => {
+                                return (
+                                    <SilidingMenu key={index} data={data} />
+                                )
+                            })}
+                        </View>
+                    </View>
+                </Animatable.View>
                 : <TouchableOpacity onPress={() => setSelected(index)} style={styles.buttons}>
                     <View style={[styles.btn, { backgroundColor: selected === index ? null : "white" }]}>
-                        <Image style={styles.icon} source={item.src} />
-                        <Text style={{ color: "black", paddingHorizontal: 8 }}>{item.label}</Text>
+                        <Image style={[styles.icon, { tintColor: item.color }]} source={item.src} />
+                        <Text style={{ color: "black", fontSize: width / 40 }}>{item.label}</Text>
                     </View>
                 </TouchableOpacity>
             }
-        </View>
+
+        </View >
     )
 }
 const styles = StyleSheet.create({
+    container: {
+        width: width / 7,
+        height: width / 8,
+    },
+    sidingContainer: {
+        width: width / 8,
+        height: width / 9,
+    },
     icon: {
-        width: 30,
-        height: 30,
+        width: width / 13,
+        height: width / 13,
     },
     btn: {
         alignItems: 'center',
-        padding: 8,
-        borderRadius: 16,
+    },
+    roteText: {
+        transform: [{ rotate: '-90deg' }],
+        fontSize: width / 45,
+        color: 'black',
+        width: width / 8,
+        textAlign: 'center'
+    },
+    buttons: {
+        marginLeft: 10,
     }
 });
 export default TabMenu
