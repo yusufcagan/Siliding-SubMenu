@@ -6,7 +6,7 @@ import { SilidingData } from '../data/DATA'
 
 const { width, height } = Dimensions.get('window');
 
-const TabMenu = ({ index, item, selected, setSelected }) => {
+const TabMenu = ({ index, item, selected, setSelected, setQuerySec }) => {
 
     const viewRef = useRef(null);
 
@@ -31,7 +31,7 @@ const TabMenu = ({ index, item, selected, setSelected }) => {
                         <View style={{ flex: 15, flexDirection: 'row', backgroundColor: 'white', margin: 3, borderRadius: 5, justifyContent: 'space-between' }}>
                             {SilidingData.map((data, index) => {
                                 return (
-                                    <SilidingMenu key={index} data={data} />
+                                    <SilidingMenu key={index} data={data} setQuerySec={setQuerySec} index={index} />
                                 )
                             })}
                         </View>

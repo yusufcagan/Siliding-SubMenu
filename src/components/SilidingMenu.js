@@ -3,9 +3,10 @@ import React from 'react'
 
 const { width, height } = Dimensions.get('window');
 
-const SilidingMenu = ({ data }) => {
+const SilidingMenu = ({ data, setQuerySec, index }) => {
+
     return (
-        <TouchableOpacity style={styles.buttons}>
+        <TouchableOpacity onPress={() => setQuerySec(index)} style={styles.buttons}>
             <View style={[styles.btn]}>
                 <Image style={[styles.icon]} source={data.src} />
                 <Text style={{ flexWrap: 'nowrap', color: "black", fontSize: width / 40 }}>{data.label}</Text>
