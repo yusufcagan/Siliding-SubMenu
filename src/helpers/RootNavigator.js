@@ -8,13 +8,19 @@ import HomeIcon from '../assets/icons/home.png'
 import SocialIcon from '../assets/icons/social.png'
 import Ticket from '../assets/icons/ticket.png'
 import Finger from '../assets/icons/little_finger.png'
-import { Image } from 'react-native';
+import { Image, Text, View } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator
+            screenOptions={({ route }) => ({
+                headerShown: false,
+                tabBarStyle: {
+                    backgroundColor: '#303144'
+                }
+            })}>
             <Tab.Screen name="Home" component={Home} options={{
                 tabBarIcon: ({ focused }) => (
                     <Image
@@ -39,12 +45,11 @@ function MyTabs() {
                     />
                 )
             }} />
-            <Tab.Screen name="Ratio" component={Ratio} options={{
+            <Tab.Screen name="2.45" component={Ratio} options={{
                 tabBarIcon: ({ focused }) => (
-                    <Image
-                        source={HomeIcon}
-                        style={{ height: '50%', width: '30%', tintColor: focused ? 'blue' : 'grey' }}
-                    />
+                    <View style={{ height: 25, width: 25, borderRadius: 50, backgroundColor: focused ? 'blue' : 'grey', justifyContent: 'center' }}>
+                        <Text style={{ textAlign: 'center', color: 'white' }}>1</Text>
+                    </View>
                 )
             }} />
             <Tab.Screen name="Coupon" component={Coupon} options={{

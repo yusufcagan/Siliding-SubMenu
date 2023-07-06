@@ -6,17 +6,18 @@ import { SilidingData } from '../data/DATA'
 
 const { width, height } = Dimensions.get('window');
 
-const TabMenu = ({ index, item, selected, setSelected, setQuerySec }) => {
+const TabMenu = ({ index, item, selected, setSelected, setQuerySec, querySec }) => {
 
     const viewRef = useRef(null);
 
     useEffect(() => {
         if (selected === index) {
-            viewRef.current.animate({ 0: { scale: 0 }, 1: { scale: 1 } });
-        } else {
-            //.current.animate({ 0: { scale: 1, }, 1: { scale: 0, } });
+            viewRef.current.animate({ 0: { scaleX: 0.5, }, 1: { scaleX: 1, } });
         }
-    }, [selected, viewRef]);
+        else {
+            //viewRef.current.animate({ 0: { scaleX: 1, }, 1: { scaleX: 0.5, } })
+        }
+    }, [selected, index]);
 
     return (
         <View style={[{ flex: selected === index ? 1 : null }, styles.container]} >
@@ -28,19 +29,28 @@ const TabMenu = ({ index, item, selected, setSelected, setQuerySec }) => {
                         <View style={{ flexDirection: 'row', flex: 1.2, alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={styles.roteText}>{item.label.toUpperCase()}</Text>
                         </View>
-                        <View style={{ flex: 15, flexDirection: 'row', backgroundColor: 'white', margin: 3, borderRadius: 5, justifyContent: 'space-between' }}>
+                        <View style={{ flex: 15, flexDirection: 'row', backgroundColor: '#303144', margin: 3, borderRadius: 5, justifyContent: 'space-between' }}>
                             {SilidingData.map((data, index) => {
                                 return (
-                                    <SilidingMenu key={index} data={data} setQuerySec={setQuerySec} index={index} />
+                                    <SilidingMenu
+                                        key={index}
+                                        data={data}
+                                        setQuerySec={setQuerySec}
+                                        index={index}
+                                        querySec={querySec} />
                                 )
                             })}
                         </View>
                     </View>
                 </Animatable.View>
-                : <TouchableOpacity onPress={() => setSelected(index)} style={styles.buttons}>
-                    <View style={[styles.btn, { backgroundColor: selected === index ? null : "white" }]}>
+                : <TouchableOpacity onPress={() => {
+                    setSelected(index)
+                    setQuerySec(null)
+                }
+                } style={styles.buttons}>
+                    <View style={[styles.btn, { backgroundColor: selected === index ? null : "#303144" }]}>
                         <Image style={[styles.icon, { tintColor: item.color }]} source={item.src} />
-                        <Text style={{ color: "black", fontSize: width / 40 }}>{item.label}</Text>
+                        <Text style={{ color: item.color, fontSize: width / 40 }}>{item.label}</Text>
                     </View>
                 </TouchableOpacity>
             }
