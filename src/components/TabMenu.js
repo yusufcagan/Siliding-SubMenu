@@ -12,12 +12,12 @@ const TabMenu = ({ index, item, selected, setSelected, setQuerySec, querySec }) 
 
     useEffect(() => {
         if (selected === index) {
-            viewRef.current.animate({ 0: { scaleX: 0.5, }, 1: { scaleX: 1, } });
+            viewRef.current.animate({ 0: { scaleX: 0.2, }, 1: { scaleX: 1, } });
         }
         else {
-            //viewRef.current.animate({ 0: { scaleX: 1, }, 1: { scaleX: 0.5, } })
+
         }
-    }, [selected, index]);
+    }, [selected]);
 
     return (
         <View style={[{ flex: selected === index ? 1 : null }, styles.container]} >

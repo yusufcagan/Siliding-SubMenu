@@ -11,7 +11,7 @@ const Bulten = () => {
 
   const MatchComponent = ({ item }) => (
     <TouchableOpacity style={styles.matchStyle} >
-      <Text style={{ padding: 5, textAlign: 'center' }}>{item.name1}  -  {item.name2}</Text>
+      <Text style={{ padding: 5, textAlign: 'center', color: 'black' }}>{item.name1}  -  {item.name2}</Text>
     </TouchableOpacity >
   );
 

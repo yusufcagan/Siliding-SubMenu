@@ -3,8 +3,8 @@ import React from 'react'
 
 export default function Home() {
   return (
-    <View>
-      <Text>Home</Text>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ color: 'black', fontSize: 30 }}>Home Screen</Text>
     </View>
   )
 }

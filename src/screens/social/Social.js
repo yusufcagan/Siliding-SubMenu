@@ -3,8 +3,8 @@ import React from 'react'
 
 const Social = () => {
   return (
-    <View>
-      <Text>Social</Text>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ color: 'black', fontSize: 30 }}>Social Screen</Text>
     </View>
   )
 }
